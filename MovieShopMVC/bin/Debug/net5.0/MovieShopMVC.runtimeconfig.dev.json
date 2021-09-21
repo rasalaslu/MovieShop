@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Roku\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Roku\\.nuget\\packages"
+    ]
+  }
+}

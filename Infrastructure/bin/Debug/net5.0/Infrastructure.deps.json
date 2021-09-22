@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "Infrastructure/1.0.0": {
+        "dependencies": {
+          "ApplicationCore": "1.0.0"
+        },
         "runtime": {
           "Infrastructure.dll": {}
+        }
+      },
+      "ApplicationCore/1.0.0": {
+        "runtime": {
+          "ApplicationCore.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ApplicationCore/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

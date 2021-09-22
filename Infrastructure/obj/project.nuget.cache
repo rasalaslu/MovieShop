@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vDTUw5lLGsKGwRyks/07cFVRoI3NwjOiWD9fBmNhPA7NkrDwC3ExgChvLOuVwGXOFgre7fnCTzGcaagj68MOgA==",
+  "dgSpecHash": "g9tjyK/TVxsitAcqBlIymo8kwjXu/gwF+QS2XyiIKUbWzrQGGcvdwAY93mfTZpanZRwLHL1NCd5myZ/riM6kCw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Roku\\source\\repos\\MovieShop\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "D:\\GitHub\\MovieShop\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

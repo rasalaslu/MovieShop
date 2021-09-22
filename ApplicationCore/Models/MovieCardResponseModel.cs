@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models
 {
-    class MovieCardResponseModel
+    public class MovieCardResponseModel
     {
         public int Id { get; set; }
-        public string PostUrl { get; set; }
+        public string PosterUrl { get; set; }
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Models;
 
-namespace ApplicationCore.Service_Interfaces
+namespace ApplicationCore.ServiceInterfaces
 {
     public interface IMovieService
     {
-        // Models
+        // Controller returns models
         IEnumerable<MovieCardResponseModel> Get30HighestGrossingMovies();
     }
 }
-}
+

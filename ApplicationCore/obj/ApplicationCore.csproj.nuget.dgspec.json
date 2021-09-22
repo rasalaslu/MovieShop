@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Roku\\source\\repos\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {}
+    "D:\\GitHub\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Roku\\source\\repos\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {
+    "D:\\GitHub\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Roku\\source\\repos\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "D:\\GitHub\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "C:\\Users\\Roku\\source\\repos\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "D:\\GitHub\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\Roku\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Roku\\source\\repos\\MovieShop\\ApplicationCore\\obj\\",
+        "outputPath": "D:\\GitHub\\MovieShop\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Roku\\AppData\\Roaming\\NuGet\\NuGet.Config",

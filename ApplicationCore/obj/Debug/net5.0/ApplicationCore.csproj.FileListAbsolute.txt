@@ -10,3 +10,15 @@ C:\Users\Roku\source\repos\MovieShop\ApplicationCore\obj\Debug\net5.0\Applicatio
 C:\Users\Roku\source\repos\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.dll
 C:\Users\Roku\source\repos\MovieShop\ApplicationCore\obj\Debug\net5.0\ref\ApplicationCore.dll
 C:\Users\Roku\source\repos\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.pdb
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csproj.AssemblyReference.cache
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.AssemblyInfoInputs.cache
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.AssemblyInfo.cs
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.csproj.CoreCompileInputs.cache
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.dll
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ref\ApplicationCore.dll
+D:\GitHub\MovieShop\ApplicationCore\obj\Debug\net5.0\ApplicationCore.pdb
+D:\GitHub\MovieShop\ApplicationCore\bin\Debug\net5.0\ApplicationCore.deps.json
+D:\GitHub\MovieShop\ApplicationCore\bin\Debug\net5.0\ApplicationCore.dll
+D:\GitHub\MovieShop\ApplicationCore\bin\Debug\net5.0\ref\ApplicationCore.dll
+D:\GitHub\MovieShop\ApplicationCore\bin\Debug\net5.0\ApplicationCore.pdb

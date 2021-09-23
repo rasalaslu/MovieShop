@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "kK2jMI0hlPwmNDTvlMAwrQQ8q9SJNwIdKh2o/veTJDM8ACr+wmCrT2KJ+LAlQsXRTpza4Cdo/rxSDeR3bpj55A==",
+  "dgSpecHash": "lAPutqVQ9FcxP//nOL80rUBo3e5Ti2riHPI24Sf/fn6VpBKxXSamSawz0psKK77BZ7jC+QHxYqxpnSPmw8HpTQ==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Roku\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

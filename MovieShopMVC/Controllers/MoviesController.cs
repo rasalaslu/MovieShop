@@ -22,5 +22,10 @@ namespace MovieShopMVC.Controllers
             var movies = _movieService.Get30HighestGrossingMovies();
             return View(movies);
         }
+
+        public IActionResult Details(int id)
+        {
+            return View();
+        }
     }
 }

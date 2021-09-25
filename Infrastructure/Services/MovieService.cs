@@ -28,7 +28,9 @@ namespace Infrastructure.Services
 
             // mapping entites to models data so that services always return models mot entites
             foreach (var movie in movies)
+            {
                 moviesCardResponseModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl });
+            }
 
             // return list of movieresponse models
             return moviesCardResponseModel;

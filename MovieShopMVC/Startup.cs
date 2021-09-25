@@ -12,6 +12,8 @@ using ApplicationCore.ServiceInterfaces;
 using Infrastructure.Services;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using ApplicationCore.RepositoryInterfaces;
+using Infrastructure.Repository;
 
 namespace MovieShopMVC
 {
@@ -27,8 +29,13 @@ namespace MovieShopMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // .NET Core has build-in DI support
+            // Old .NET Framework didn't have build-in DI, need 3rd part libararies: Autofac, Ninject
+
+            // 3 Scopes: AddScoped, AddTransient, AddSingleton
             services.AddControllersWithViews();
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
 
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShopDbConnection")));
         }

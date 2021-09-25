@@ -14,11 +14,15 @@ namespace MovieShopMVC.Controllers
     {
         private readonly IMovieService _movieService;
 
-        public HomeController(IMovieService )
+        public HomeController(IMovieService movieService)
+        {
+            _movieService = movieService;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var movies = _movieService.Get30HighestGrossingMovies();
+            return View(movies);
         }
 
         public IActionResult Privacy()

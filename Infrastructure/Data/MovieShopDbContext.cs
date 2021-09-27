@@ -20,6 +20,10 @@ namespace Infrastructure.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
         public DbSet<Cast> Casts { get; set; }
+        public DbSet<MovieCrew> MovieCrews { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
 
         // Fluent API way of modeling the database 
@@ -29,7 +33,10 @@ namespace Infrastructure.Data
             modelBuilder.Entity<Movie>(ConfigureMovie);
             modelBuilder.Entity<Trailer>(ConfigureTrailer);
             modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
-            //modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
+            modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
+            modelBuilder.Entity<MovieCrew>(ConfigureMovieCrew);
+            modelBuilder.Entity<Review>(ConfigureReview);
+            modelBuilder.Entity<UserRole>(ConfigureUserRole);
         }
 
 
@@ -60,8 +67,8 @@ namespace Infrastructure.Data
         {
             builder.ToTable("MovieGenre");
             builder.HasKey(mg => new { mg.MovieId, mg.GenreId });
-            builder.HasOne(m => m.Movie).WithMany(m => m.Genres).HasForeignKey(mg => mg.MovieId);
-            builder.HasOne(m => m.Genre).WithMany(g => g.Movies).HasForeignKey(mg => mg.GenreId);
+            builder.HasOne(mg => mg.Movie).WithMany(m => m.MovieGenres).HasForeignKey(mg => mg.MovieId);
+            builder.HasOne(mg => mg.Genre).WithMany(g => g.MovieGenres).HasForeignKey(mg => mg.GenreId);
         }
 
         private void ConfigureTrailer(EntityTypeBuilder<Trailer> builder)
@@ -76,7 +83,30 @@ namespace Infrastructure.Data
         {
             builder.ToTable("MovieCast");
             builder.HasKey(mc => new { mc.MovieId, mc.CastId, mc.Character });
-            //builder.HasOne(mc => mc.Movie).WithMany(m => m.Casts).HasForeignKey(mc => mc.MovieId);
+            builder.HasOne(mc => mc.Movie).WithMany(m => m.MovieCasts).HasForeignKey(mc => mc.MovieId);
+            builder.HasOne(mc => mc.Cast).WithMany(c => c.MovieCasts).HasForeignKey(mc => mc.CastId);
+        }
+
+        private void ConfigureMovieCrew(EntityTypeBuilder<MovieCrew> builder)
+        {
+            builder.ToTable("MovieCrew");
+            builder.HasKey(mc => new { mc.MovieId, mc.CrewId, mc.Department, mc.Job });
+            builder.HasOne(mc => mc.Movie).WithMany(m => m.MovieCrews).HasForeignKey(mc => mc.MovieId);
+            builder.HasOne(mc => mc.Crew).WithMany(c => c.MovieCrews).HasForeignKey(mc => mc.CrewId);
+        }
+
+        private void ConfigureReview(EntityTypeBuilder<Review> builder)
+        {
+            builder.ToTable("Review");
+            builder.HasKey(r => new { r.MovieId, r.UserId });
+            builder.HasOne(r => r.Movie).WithMany(m => m.Reviews).HasForeignKey(r => r.MovieId);
+            //
+        }
+
+        private void ConfigureUserRole(EntityTypeBuilder<UserRole> builder)
+        {
+            builder.ToTable("UserRole");
+            builder.HasKey(ur => ur.RoleId);
         }
 
         // Func<int, int , decimal>

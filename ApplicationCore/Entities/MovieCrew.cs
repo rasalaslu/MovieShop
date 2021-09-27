@@ -17,5 +17,8 @@ namespace ApplicationCore.Entities
         public string Department { get; set; }
         [MaxLength(128)]
         public string Job { get; set; }
+
+        public Movie Movie { get; set; }
+        public Crew Crew { get; set; }
     }
 }

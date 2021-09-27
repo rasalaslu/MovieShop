@@ -17,5 +17,8 @@ namespace ApplicationCore.Entities
         public decimal Rating { get; set; }
         [MaxLength(4096)]
         public string ReviewText { get; set; }
+
+        public Movie Movie { get; set; }
+        //public User User { get; set; }
     }
 }

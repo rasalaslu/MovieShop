@@ -22,6 +22,7 @@ namespace Infrastructure.Repository
             // go to database and and get data using LINQ with EF
             var movies = _movieShopDbContext.Movies.OrderByDescending(m => m.Revenue).Take(30).ToList();
             return movies;
+
         }
     }
 }

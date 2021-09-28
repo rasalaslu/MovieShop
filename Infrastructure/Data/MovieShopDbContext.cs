@@ -20,10 +20,14 @@ namespace Infrastructure.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
         public DbSet<Cast> Casts { get; set; }
+        public DbSet<Crew> Crews { get; set; }
         public DbSet<MovieCrew> MovieCrews { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
 
         // Fluent API way of modeling the database 
@@ -36,6 +40,8 @@ namespace Infrastructure.Data
             modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
             modelBuilder.Entity<MovieCrew>(ConfigureMovieCrew);
             modelBuilder.Entity<Review>(ConfigureReview);
+            modelBuilder.Entity<Favorite>(ConfigureFavorite);
+            modelBuilder.Entity<Purchase>(ConfigurePurchase);
             modelBuilder.Entity<UserRole>(ConfigureUserRole);
         }
 
@@ -100,14 +106,32 @@ namespace Infrastructure.Data
             builder.ToTable("Review");
             builder.HasKey(r => new { r.MovieId, r.UserId });
             builder.HasOne(r => r.Movie).WithMany(m => m.Reviews).HasForeignKey(r => r.MovieId);
-            //
+            builder.HasOne(r => r.User).WithMany(u => u.Reviews).HasForeignKey(r => r.UserId);
+        }
+
+        private void ConfigureFavorite(EntityTypeBuilder<Favorite> builder)
+        {
+            builder.ToTable("Favorite");
+            builder.HasOne(f => f.Movie).WithMany(m => m.Favorites).HasForeignKey(f => f.MovieId);
+            builder.HasOne(f => f.User).WithMany(u => u.Favorites).HasForeignKey(f => f.UserId);
+        }
+
+        private void ConfigurePurchase(EntityTypeBuilder<Purchase> builder)
+        {
+            builder.ToTable("Purchase");
+            builder.HasOne(p => p.Movie).WithMany(m => m.Purchases).HasForeignKey(f => f.MovieId);
+            builder.HasOne(f => f.User).WithMany(u => u.Purchases).HasForeignKey(f => f.UserId);
         }
 
         private void ConfigureUserRole(EntityTypeBuilder<UserRole> builder)
         {
             builder.ToTable("UserRole");
             builder.HasKey(ur => ur.RoleId);
+            builder.HasOne(ur => ur.User).WithOne(u => u.UserRole).HasForeignKey<UserRole>(ur => ur.UserId);
+            builder.HasOne(ur => ur.Role).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.RoleId);
         }
+
+
 
         // Func<int, int , decimal>
         // decimal method(int, int)

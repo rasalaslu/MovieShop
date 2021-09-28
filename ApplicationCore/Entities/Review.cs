@@ -19,6 +19,6 @@ namespace ApplicationCore.Entities
         public string ReviewText { get; set; }
 
         public Movie Movie { get; set; }
-        //public User User { get; set; }
+        public User User { get; set; }
     }
 }

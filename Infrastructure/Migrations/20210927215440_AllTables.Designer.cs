@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    [Migration("20210927031300_AllTables_1ver")]
-    partial class AllTables_1ver
+    [Migration("20210927215440_AllTables")]
+    partial class AllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,28 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Crew");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favorite");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Genre", b =>
@@ -227,6 +249,37 @@ namespace Infrastructure.Migrations
                     b.ToTable("MovieGenre");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Purchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchaseDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PurchaseNumber")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Purchase");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Review", b =>
                 {
                     b.Property<int>("MovieId")
@@ -244,7 +297,25 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("MovieId", "UserId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Review");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Trailer", b =>
@@ -279,7 +350,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccessFailedCount")
+                    b.Property<int?>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -297,14 +368,14 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<DateTime>("LastLoginDateTime")
+                    b.Property<DateTime?>("LastLoginDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<DateTime>("LockoutEndDate")
+                    b.Property<DateTime?>("LockoutEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
@@ -315,10 +386,10 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<bool>("TwoFactorEnabled")
+                    b.Property<bool?>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("isLocked")
+                    b.Property<bool?>("isLocked")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -329,16 +400,36 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.UserRole", b =>
                 {
                     b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("RoleId");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("UserRole");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Favorite", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Movie", "Movie")
+                        .WithMany("Favorites")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApplicationCore.Entities.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
@@ -398,6 +489,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Purchase", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Movie", "Movie")
+                        .WithMany("Purchases")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApplicationCore.Entities.User", "User")
+                        .WithMany("Purchases")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Review", b =>
                 {
                     b.HasOne("ApplicationCore.Entities.Movie", "Movie")
@@ -406,7 +516,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApplicationCore.Entities.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Trailer", b =>
@@ -418,6 +536,25 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.UserRole", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApplicationCore.Entities.User", "User")
+                        .WithOne("UserRole")
+                        .HasForeignKey("ApplicationCore.Entities.UserRole", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Cast", b =>
@@ -437,15 +574,35 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ApplicationCore.Entities.Movie", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("MovieCasts");
 
                     b.Navigation("MovieCrews");
 
                     b.Navigation("MovieGenres");
 
+                    b.Navigation("Purchases");
+
                     b.Navigation("Reviews");
 
                     b.Navigation("Trailers");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.User", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Purchases");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("UserRole");
                 });
 #pragma warning restore 612, 618
         }

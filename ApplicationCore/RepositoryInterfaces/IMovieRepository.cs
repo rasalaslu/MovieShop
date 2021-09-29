@@ -8,9 +8,11 @@ using ApplicationCore.Entities;
 // Repository returns entities
 namespace ApplicationCore.RepositoryInterfaces
 {
-    public interface IMovieRepository
+    public interface IMovieRepository: IAsyncRepository<Movie>
     {
-        IEnumerable<Movie> Get30HighestGrossingMovies();
-        IEnumerable<Movie> GetOneGenreMovies(int genreId);
+        //  IEnumerable<Movie> Get30HighestGrossingMovies();
+        Task<IEnumerable<Movie>> Get30HighestGrossingMovies();
+        // select top 30 * from Movie order by Revenue
+
     }
 }

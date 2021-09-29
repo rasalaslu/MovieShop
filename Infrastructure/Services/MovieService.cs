@@ -19,10 +19,10 @@ namespace Infrastructure.Services
             _movieRepository = movieRepository;
         }
 
-        public IEnumerable<MovieCardResponseModel> Get30HighestGrossingMovies()
+        public async Task<IEnumerable<MovieCardResponseModel>> Get30HighestGrossingMovies()
         {
             // list of movie entites 
-            var movies = _movieRepository.Get30HighestGrossingMovies();
+            var movies = await _movieRepository.Get30HighestGrossingMovies();
 
             var moviesCardResponseModel = new List<MovieCardResponseModel>();
 
@@ -34,10 +34,18 @@ namespace Infrastructure.Services
             return moviesCardResponseModel;
         }
 
-        public IEnumerable<MovieCardResponseModel> GetOneGenreMovies(int genreId)
+        public async Task<MovieDetailsResponseModel> GetMovieDetails(int id)
         {
-            throw new NotImplementedException();
-        }
+            var movie = await _movieRepository.GetByIdAsync(id);
 
+            var movieDetails = new MovieDetailsResponseModel
+            {
+                Id = movie.Id
+            };
+
+
+            return movieDetails;
+
+        }
     }
 }

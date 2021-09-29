@@ -10,8 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
     public interface IMovieService
     {
         // Controller returns models
-        IEnumerable<MovieCardResponseModel> Get30HighestGrossingMovies();
-        IEnumerable<MovieCardResponseModel> GetOneGenreMovies(int genreId);
+        Task<IEnumerable<MovieCardResponseModel>> Get30HighestGrossingMovies();
+
+        Task<MovieDetailsResponseModel> GetMovieDetails(int id);
+
     }
 }
 

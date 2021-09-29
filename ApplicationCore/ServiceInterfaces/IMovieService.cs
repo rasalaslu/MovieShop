@@ -11,6 +11,7 @@ namespace ApplicationCore.ServiceInterfaces
     {
         // Controller returns models
         IEnumerable<MovieCardResponseModel> Get30HighestGrossingMovies();
+        IEnumerable<MovieCardResponseModel> GetOneGenreMovies(int genreId);
     }
 }
 

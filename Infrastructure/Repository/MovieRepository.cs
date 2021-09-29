@@ -24,5 +24,10 @@ namespace Infrastructure.Repository
             return movies;
 
         }
+
+        public IEnumerable<Movie> GetOneGenreMovies(int genreId)
+        {
+            var movies = _movieShopDbContext.Movies.
+        }
     }
 }

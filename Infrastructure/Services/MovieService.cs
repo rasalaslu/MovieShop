@@ -33,5 +33,11 @@ namespace Infrastructure.Services
             // return list of movieresponse models
             return moviesCardResponseModel;
         }
+
+        public IEnumerable<MovieCardResponseModel> GetOneGenreMovies(int genreId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -126,8 +126,8 @@ namespace Infrastructure.Data
         private void ConfigureUserRole(EntityTypeBuilder<UserRole> builder)
         {
             builder.ToTable("UserRole");
-            builder.HasKey(ur => ur.RoleId);
-            builder.HasOne(ur => ur.User).WithOne(u => u.UserRole).HasForeignKey<UserRole>(ur => ur.UserId);
+            builder.HasKey(ur => new { ur.RoleId, ur.UserId });
+            builder.HasOne(ur => ur.User).WithMany(u => u.UserRoles).HasForeignKey(ur => ur.UserId);
             builder.HasOne(ur => ur.Role).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.RoleId);
         }
 

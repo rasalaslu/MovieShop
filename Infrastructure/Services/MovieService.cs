@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using ApplicationCore.Models;
 using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
-using Infrastructure.Repository;
 
 namespace Infrastructure.Services
 {
@@ -34,16 +33,56 @@ namespace Infrastructure.Services
             return moviesCardResponseModel;
         }
 
-        public async Task<MovieDetailsResponseModel> GetMovieDetails(int id)
+        public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
-
+            if (movie == null) throw new Exception($"No Movie found for {id}");
+            //   var favoritesCount = await _favoriteRepository.GetCountAsync(f => f.MovieId == id);
             var movieDetails = new MovieDetailsResponseModel
             {
-                Id = movie.Id
+                Id = movie.Id,
+                Budget = movie.Budget,
+                Overview = movie.Overview,
+                Price = movie.Price,
+                PosterUrl = movie.PosterUrl,
+                Revenue = movie.Revenue,
+                ReleaseDate = movie.ReleaseDate.GetValueOrDefault(),
+                Rating = movie.Rating,
+                Tagline = movie.Tagline,
+                Title = movie.Title,
+                RunTime = movie.RunTime,
+                BackdropUrl = movie.BackdropUrl,
+                // FavoritesCount = favoritesCount,
+                ImdbUrl = movie.ImdbUrl,
+                TmdbUrl = movie.TmdbUrl
             };
 
+            foreach (var movieGenre in movie.MovieGenres)
+                movieDetails.Genres.Add(new GenreModel
+                {
+                    Id = movieGenre.Genre.Id,
+                    Name = movieGenre.Genre.Name
+                });
 
+            foreach (var movieCast in movie.MovieCasts)
+                movieDetails.Casts.Add(new CastResponseModel
+                {
+                    Id = movieCast.Cast.Id,
+                    Name = movieCast.Cast.Name,
+                    Character = movieCast.Character,
+                    Gender = movieCast.Cast.Gender,
+                    ProfilePath = movieCast.Cast.ProfilePath,
+                    TmdbUrl = movieCast.Cast.TmdbUrl
+                });
+
+            foreach (var trailer in movie.Trailers)
+                movieDetails.Trailers.Add(new TrailerResponseModel
+                {
+                    Id = trailer.Id,
+                    Name = trailer.Name,
+                    TrailerUrl = trailer.TrailerUrl,
+                    MovieId = trailer.MovieId
+                });
             return movieDetails;
 
         }

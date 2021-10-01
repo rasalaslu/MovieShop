@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.RepositoryInterfaces
 {
+    // Base CRUD operations that can be re used across multiple repositories 
     public interface IAsyncRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id);
@@ -22,7 +23,5 @@ namespace ApplicationCore.RepositoryInterfaces
         Task<T> UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
-
-
     }
 }

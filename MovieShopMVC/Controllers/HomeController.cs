@@ -19,9 +19,9 @@ namespace MovieShopMVC.Controllers
             _movieService = movieService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var movies = _movieService.Get30HighestGrossingMovies();
+            var movies = await _movieService.Get30HighestGrossingMovies();
             return View(movies);
         }
 
@@ -35,5 +35,8 @@ namespace MovieShopMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        // PARTIAL VIEWS so that we can re use same views in multiple views
+        // 
     }
 }

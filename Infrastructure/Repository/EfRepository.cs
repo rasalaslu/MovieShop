@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repository
+namespace Infrastructure.Repositories
 {
     public class EfRepository<T> : IAsyncRepository<T> where T : class
     {

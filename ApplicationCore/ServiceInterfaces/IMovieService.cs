@@ -12,7 +12,7 @@ namespace ApplicationCore.ServiceInterfaces
         // Controller returns models
         Task<IEnumerable<MovieCardResponseModel>> Get30HighestGrossingMovies();
 
-        Task<MovieDetailsResponseModel> GetMovieDetails(int id);
+        Task<MovieDetailsResponseModel> GetMovieAsync(int id);
 
     }
 }

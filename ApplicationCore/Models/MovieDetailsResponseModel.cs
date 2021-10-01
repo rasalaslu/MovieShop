@@ -25,7 +25,7 @@ namespace ApplicationCore.Models
         public decimal? Price { get; set; }
 
         public List<GenreModel> Genres { get; set; }
-        public List<CastModel> Casts { get; set; }
-        public List<TrailerModel> Trailers { get; set; }
+        public List<CastResponseModel> Casts { get; set; }
+        public List<TrailerResponseModel> Trailers { get; set; }
     }
 }

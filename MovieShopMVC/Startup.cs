@@ -30,10 +30,13 @@ namespace MovieShopMVC
             // old .NET Framework did not had built-in DI
             // we used with 3rd party libraries, Autofac, Ninject
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 
             // 3 scopes
             // AddScoped

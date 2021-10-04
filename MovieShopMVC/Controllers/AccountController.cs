@@ -55,7 +55,7 @@ namespace MovieShopMVC.Controllers
                 new Claim( ClaimTypes.Email, user.Email ),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName),
-                new Claim(ClaimTypes.Name, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.DateOfBirth, user.DateOfBirth.ToString())
             };
 
@@ -70,6 +70,13 @@ namespace MovieShopMVC.Controllers
 
             // redirect to home page
             return LocalRedirect("~/");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+
         }
 
     }

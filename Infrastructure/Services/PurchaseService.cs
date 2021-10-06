@@ -17,9 +17,12 @@ namespace Infrastructure.Services
         {
             _purchaseRepository = purchaseRepository;
         }
+
+
         public async Task<IEnumerable<MovieCardResponseModel>> GetPurchasedMoviesByUser(int id)
         {
             var movies = await _purchaseRepository.GetPurchasedMoviesByUserId(id);
+            if (movies == null) throw new Exception($"You haven't bought any movie");
             var purchaseRespondModel = new List<MovieCardResponseModel>();
             foreach(var movie in movies)
                 purchaseRespondModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl });

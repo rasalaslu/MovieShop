@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopMVC", "MovieShopMVC\MovieShopMVC.csproj", "{8BF99233-6322-4155-AA97-F9845633B106}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieShopMVC", "MovieShopMVC\MovieShopMVC.csproj", "{8BF99233-6322-4155-AA97-F9845633B106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{54F9C7B4-327C-4F92-83C6-CC4CE44DDD7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{54F9C7B4-327C-4F92-83C6-CC4CE44DDD7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{151F2691-2542-4B44-BAD9-8B864D5595B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{151F2691-2542-4B44-BAD9-8B864D5595B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopAPI", "MovieShopAPI\MovieShopAPI.csproj", "{F4A051A4-3AEA-499E-9AD4-D81D1CF11ECE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{151F2691-2542-4B44-BAD9-8B864D5595B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{151F2691-2542-4B44-BAD9-8B864D5595B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{151F2691-2542-4B44-BAD9-8B864D5595B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A051A4-3AEA-499E-9AD4-D81D1CF11ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A051A4-3AEA-499E-9AD4-D81D1CF11ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A051A4-3AEA-499E-9AD4-D81D1CF11ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A051A4-3AEA-499E-9AD4-D81D1CF11ECE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

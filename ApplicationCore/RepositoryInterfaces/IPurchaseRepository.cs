@@ -7,8 +7,9 @@ using ApplicationCore.Entities;
 
 namespace ApplicationCore.RepositoryInterfaces
 {
-    public interface IPurchaseRepository
+    public interface IPurchaseRepository: IAsyncRepository<Purchase>
     {
-        Task<IEnumerable<Movie>> GetPurchasedMoviesByUserId(int id);
+        Task<IEnumerable<Purchase>> GetPurchasedMoviesByUserId(int id);
+
     }
 }

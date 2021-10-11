@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class MovieRepository : EfRepository<Movie>, IMovieRepository
+    public class MovieRepository: EfRepository<Movie>, IMovieRepository
     {
-        public MovieRepository(MovieShopDbContext dbContext) : base(dbContext)
+        public MovieRepository(MovieShopDbContext dbContext): base(dbContext)
         {
         }
 
@@ -22,6 +22,24 @@ namespace Infrastructure.Repositories
             // EF , Dapper...they have both async methods and sync method
             var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).Take(30).ToListAsync();
             return movies;
+        }
+
+        public async Task<IEnumerable<Movie>> Get30HighestRatingMovies()
+        {
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Rating).Take(30).ToListAsync();
+            return movies;
+        }
+
+        public async Task<IEnumerable<Genre>> GetMoviesGenres()
+        {
+            var genres = await _dbContext.Genres.OrderByDescending(g => g.Id).ToListAsync();
+            return genres;
+        }
+
+        public async Task<IEnumerable<Review>> GetReviewsByMovie(int movieId)
+        {
+            var reviews = await _dbContext.Reviews.OrderByDescending(r => r.Rating).Where(r => r.MovieId == movieId).ToListAsync();
+            return reviews;
         }
 
         public override async Task<Movie> GetByIdAsync(int id)
@@ -37,5 +55,6 @@ namespace Infrastructure.Repositories
 
             return movie;
         }
+
     }
 }

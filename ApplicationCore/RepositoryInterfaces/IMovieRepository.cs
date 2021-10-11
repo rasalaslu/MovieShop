@@ -10,9 +10,12 @@ namespace ApplicationCore.RepositoryInterfaces
 {
     public interface IMovieRepository: IAsyncRepository<Movie>
     {
-        //  IEnumerable<Movie> Get30HighestGrossingMovies();
+
         Task<IEnumerable<Movie>> Get30HighestGrossingMovies();
-        // select top 30 * from Movie order by Revenue
+        Task<IEnumerable<Movie>> Get30HighestRatingMovies();
+        Task<IEnumerable<Genre>> GetMoviesGenres();
+        Task<IEnumerable<Review>> GetReviewsByMovie(int movieId);
+        //Task<Review> PutReviewByMovie(int movieId, int rating, string reviewText);
 
     }
 }

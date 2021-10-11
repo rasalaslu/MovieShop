@@ -17,6 +17,10 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using ApplicationCore.Entities;
 
 namespace MovieShopAPI
 {
@@ -41,11 +45,24 @@ namespace MovieShopAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IAsyncRepository<Review>, EfRepository<Review>> ();
+            services.AddScoped<IAsyncRepository<Favorite>, EfRepository<Favorite>>();
             services.AddMemoryCache();
 
-            services.AddDbContext<MovieShopDbContext>(options =>
-                options.UseSqlServer(Configuration
-                    .GetConnectionString("MovieShopDbConnection")));
+            services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShopDbConnection")));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey =
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["secretKey"]))
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -63,9 +80,17 @@ namespace MovieShopAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MovieShopAPI v1"));
             }
 
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200").AllowAnyHeader()
+                    .AllowAnyMethod().AllowCredentials();
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -74,5 +99,6 @@ namespace MovieShopAPI
                 endpoints.MapControllers();
             });
         }
+
     }
 }

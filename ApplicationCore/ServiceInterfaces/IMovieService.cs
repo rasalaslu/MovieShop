@@ -11,7 +11,9 @@ namespace ApplicationCore.ServiceInterfaces
     {
         // Controller returns models
         Task<IEnumerable<MovieCardResponseModel>> Get30HighestGrossingMovies();
-
+        Task<IEnumerable<MovieCardResponseModel>> Get30HighestRatedMovies();
+        Task<IEnumerable<GenreModel>> GetMoviesGenres();
+        Task<IEnumerable<MovieReviewsRespondModel>> GetReviewsByMovie(int movieId);
         Task<MovieDetailsResponseModel> GetMovieAsync(int id);
 
     }

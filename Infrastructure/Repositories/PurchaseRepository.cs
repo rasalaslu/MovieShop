@@ -10,24 +10,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class PurchaseRepository : IPurchaseRepository
+    public class PurchaseRepository : EfRepository<Purchase>, IPurchaseRepository
     {
         protected readonly MovieShopDbContext _dbContext;
 
-        public PurchaseRepository(MovieShopDbContext dbContext)
+        public PurchaseRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Movie>> GetPurchasedMoviesByUserId(int id)
+        public async Task<IEnumerable<Purchase>> GetPurchasedMoviesByUserId(int userId)
         {
-            var movies = await
-                (from m in _dbContext.Movies
-                 join p in _dbContext.Purchases
-                 on m.Id equals p.MovieId
-                 where p.UserId == id
-                 select m).ToListAsync();
-            return movies;
+            var purchases = await _dbContext.Purchases.Include(m => m.Movie).Where(p => p.UserId == userId)
+                .OrderByDescending(p => p.PurchaseDateTime).ToListAsync();
+            return purchases;
         }
     }
 }

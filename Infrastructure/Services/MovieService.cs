@@ -27,17 +27,48 @@ namespace Infrastructure.Services
 
             // mapping entites to models data so that services always return models mot entites
             foreach (var movie in movies)
-                moviesCardResponseModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl });
+                moviesCardResponseModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl, Title = movie.Title, Revenue = movie.Revenue });
 
             // return list of movieresponse models
             return moviesCardResponseModel;
+        }
+
+        public async Task<IEnumerable<MovieCardResponseModel>> Get30HighestRatedMovies()
+        {
+            var movies = await _movieRepository.Get30HighestRatingMovies();
+
+            var moviesCardResponseModel = new List<MovieCardResponseModel>();
+
+            // mapping entites to models data so that services always return models mot entites
+            foreach (var movie in movies)
+                moviesCardResponseModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl, Title = movie.Title, Revenue = movie.Revenue });
+
+            // return list of movieresponse models
+            return moviesCardResponseModel;
+        }
+
+        public async Task<IEnumerable<GenreModel>> GetMoviesGenres()
+        {
+            var genres = await _movieRepository.GetMoviesGenres();
+            var genreModel = new List<GenreModel>();
+            foreach (var genre in genres)
+                genreModel.Add(new GenreModel { Id = genre.Id, Name = genre.Name });
+            return genreModel;
+        }
+
+        public async Task<IEnumerable<MovieReviewsRespondModel>> GetReviewsByMovie(int movieId)
+        {
+            var reviews = await _movieRepository.GetReviewsByMovie(movieId);
+            var reviewResponseModel = new List<MovieReviewsRespondModel>();
+            foreach (var review in reviews)
+                reviewResponseModel.Add(new MovieReviewsRespondModel { MovieId = movieId, UserId = review.UserId, Rating = review.Rating, ReviewText = review.ReviewText });
+            return reviewResponseModel;
         }
 
         public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
             if (movie == null) throw new Exception($"No Movie found for {id}");
-            //   var favoritesCount = await _favoriteRepository.GetCountAsync(f => f.MovieId == id);
             var movieDetails = new MovieDetailsResponseModel
             {
                 Id = movie.Id,
@@ -52,7 +83,6 @@ namespace Infrastructure.Services
                 Title = movie.Title,
                 RunTime = movie.RunTime,
                 BackdropUrl = movie.BackdropUrl,
-                // FavoritesCount = favoritesCount,
                 ImdbUrl = movie.ImdbUrl,
                 TmdbUrl = movie.TmdbUrl
             };
@@ -86,5 +116,6 @@ namespace Infrastructure.Services
             return movieDetails;
 
         }
+
     }
 }

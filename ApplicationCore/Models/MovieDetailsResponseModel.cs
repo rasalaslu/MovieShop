@@ -8,6 +8,13 @@ namespace ApplicationCore.Models
 {
     public class MovieDetailsResponseModel
     {
+        public MovieDetailsResponseModel()
+        {
+            Casts = new List<CastResponseModel>();
+            Genres = new List<GenreModel>();
+            //Reviews = new List<UserReviewResponseModel>();
+            Trailers = new List<TrailerResponseModel>();
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string PosterUrl { get; set; }
@@ -23,9 +30,10 @@ namespace ApplicationCore.Models
         public DateTime? ReleaseDate { get; set; }
         public int? RunTime { get; set; }
         public decimal? Price { get; set; }
-
-        public List<GenreModel> Genres { get; set; }
+        public int FavoritesCount { get; set; }
         public List<CastResponseModel> Casts { get; set; }
+        public List<GenreModel> Genres { get; set; }
+        //public List<UserReviewResponseModel> Reviews { get; set; }
         public List<TrailerResponseModel> Trailers { get; set; }
     }
 }

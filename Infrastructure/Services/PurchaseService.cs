@@ -25,7 +25,7 @@ namespace Infrastructure.Services
             if (movies == null) throw new Exception($"You haven't bought any movie");
             var purchaseRespondModel = new List<MovieCardResponseModel>();
             foreach(var movie in movies)
-                purchaseRespondModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.PosterUrl });
+                purchaseRespondModel.Add(new MovieCardResponseModel { Id = movie.Id, PosterUrl = movie.Movie.PosterUrl });
             return purchaseRespondModel;
         }
     }
